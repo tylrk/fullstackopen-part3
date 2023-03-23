@@ -1,3 +1,3 @@
-FSO Fonebook
+# FSO Fonebook
 
-Link to deployed application: https://fso-fonebook.fly.dev/
+### Link to deployed application: https://fso-fonebook.fly.dev/
