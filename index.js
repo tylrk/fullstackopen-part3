@@ -53,6 +53,11 @@ app.post("/api/persons", (request, response) => {
   const body = request.body;
   const names = persons.map((person) => person.name);
 
+  const person = new Person({
+    name: body.name,
+    number: body.number,
+  });
+  
   if (body.name === undefined) {
     return response.status(400).json({
       error: "name missing",
@@ -66,10 +71,7 @@ app.post("/api/persons", (request, response) => {
       error: "name already exists",
     });
   }
-  const person = new Person({
-    name: body.name,
-    number: body.number,
-  });
+
 
   person.save().then((savedPerson) => {
     response.json(savedPerson);
