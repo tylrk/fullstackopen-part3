@@ -13,12 +13,28 @@ mongoose
     console.log("error connecting to MongoDB:", error.message);
   });
 
+const numRegex =
+  /^(\d{3}-\d{3}-\d{4}|\d{10}|\(\d{3}\)\s*\d{3}-\d{4}|\d{2}-\d+|\d{3}-\d+)$/;
+
+const numValidator = [
+  {
+    validator: function (v) {
+      return numRegex.test(v);
+    },
+    message: (props) => `${props.value} is not a valid phone number`,
+  },
+];
+
 const personSchema = new mongoose.Schema({
   name: {
     type: String,
     minLength: 3,
   },
-  number: String,
+  number: {
+    type: String,
+    minLength: 8,
+    validate: numValidator,
+  },
 });
 
 personSchema.set("toJSON", {
